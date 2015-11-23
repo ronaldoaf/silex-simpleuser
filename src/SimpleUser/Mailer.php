@@ -201,7 +201,7 @@ class Mailer
         $subject = $template->renderBlock('subject', $context);
         $textBody = $template->renderBlock('body_text', $context);
         $htmlBody = $template->renderBlock('body_html', $context);
-
+        /*
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
             ->setFrom($fromEmail)
@@ -215,6 +215,18 @@ class Mailer
         }
 
         $this->mailer->send($message);
+        */
+        
+        mail (
+			$toEmail, 
+			$subject, 			
+			$htmlBody,                                  
+			"From: $fromEmail" . "\r\n" .
+			'MIME-Version: 1.0' . "\r\n" .
+			'Content-type: text/html; charset=iso-8859-1' . "\r\n"
+        );
+        
+        
     }
 
     /**
